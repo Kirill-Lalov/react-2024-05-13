@@ -1,31 +1,20 @@
 import { FC, ReactNode } from 'react';
 
+import { Header } from '@components/Header';
+import { Footer } from '@components/Footer';
+
 export type LayoutProps = {
-  renderHeader?: () => ReactNode;
-  renderLeftSidebar?: () => ReactNode;
-  renderMain?: () => ReactNode;
-  renderRightSidebar?: () => ReactNode;
-  renderFooter?: () => ReactNode;
+  children: ReactNode;
 };
 
-export const Layout: FC<LayoutProps> = (props) => {
-  const {
-    renderHeader,
-    renderLeftSidebar,
-    renderMain,
-    renderRightSidebar,
-    renderFooter,
-  } = props;
-
+export const Layout: FC<LayoutProps> = ({ children, ...props }) => {
   return (
-    <div>
-      {renderHeader && <header>{renderHeader()}</header>}
-      <div>
-        {renderLeftSidebar && <aside>{renderLeftSidebar()}</aside>}
-        {renderMain && <main>{renderMain()}</main>}
-        {renderRightSidebar && <aside>{renderRightSidebar()}</aside>}
-      </div>
-      {renderFooter && <footer>{renderFooter()}</footer>}
+    <div {...props}>
+      <Header />
+      <main>
+        {children}
+      </main>
+      <Footer />
     </div>
   );
 };

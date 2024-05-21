@@ -23,6 +23,7 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
+      "@app/*": ["src/app/*"],
       "@components/*": ["src/components/*"],
     },
   },
