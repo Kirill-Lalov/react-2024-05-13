@@ -8,7 +8,7 @@ export type RestaurantsProps = {
 };
 
 export const Restaurants: FC<RestaurantsProps> = ({ restaurants, ...props }) => {
-  const [selectedRestaurantId, setSelectedRestaurantId] = useState(0);
+  const [selectedRestaurantIndex, setSelectedRestaurantIndex] = useState(0);
 
   const entries: EntryType<number>[] = restaurants.map((restaurant, index) => (
     { label: restaurant.name, value: index })
@@ -16,8 +16,8 @@ export const Restaurants: FC<RestaurantsProps> = ({ restaurants, ...props }) => 
 
   return (
     <div {...props}>
-      <Tabs entries={entries} onChange={setSelectedRestaurantId} />
-      <Restaurant restaurant={restaurants[selectedRestaurantId]} />
+      <Tabs entries={entries} onChange={setSelectedRestaurantIndex} />
+      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
     </div>
   );
 };
