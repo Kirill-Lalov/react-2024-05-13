@@ -1,31 +1,14 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 export type CounterProps = {
-  /**
-   * Минимально значение счетчика
-   */
-  min?: number;
-  /**
-   * Максимальное значение счетчика
-   */
-  max?: number;
+  count: number;
+  min: number;
+  max: number;
+  increment: () => void;
+  decrement: () => void;
 };
 
-export const Counter: FC<CounterProps> = ({ min = 0, max = 5, ...props }) => {
-  const [count, setCount] = useState(0);
-
-  function increment() {
-    if (count < max) {
-      setCount(count => ++count);
-    }
-  }
-
-  function decrement() {
-    if (count > min) {
-      setCount(count => --count);
-    }
-  }
-
+export const Counter: FC<CounterProps> = ({ count, min, max, increment, decrement, ...props }) => {
   return (
     <div {...props}>
       <button disabled={count <= min} onClick={decrement}>-</button>
