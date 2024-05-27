@@ -18,6 +18,18 @@ export const Restaurants: FC<RestaurantsProps> = ({ restaurants, ...props }) => 
     <div {...props}>
       <Tabs entries={entries} onChange={setSelectedRestaurantIndex} />
       <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
     </div>
   );
 };
