@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { Button } from '@components/Button';
+
 export type RatingProps = {
   size?: number;
   rating: number;
@@ -13,9 +15,9 @@ export const Rating: FC<RatingProps> = ({ size = 5, rating, onChange, ...props }
         const value = index + 1;
 
         return (
-          <button type='button' disabled={rating === value} onClick={() => onChange(value)}>
+          <Button type='button' disabled={rating === value} onClick={() => onChange(value)}>
             {value}
-          </button>
+          </Button>
         );
       })}
     </div>

@@ -1,5 +1,6 @@
 import { FC, useReducer } from 'react';
 
+import { Button } from '@components/Button';
 import { Rating } from '@components/Rating';
 
 import { ActionType, FormType } from './types';
@@ -55,7 +56,7 @@ export const ReviewForm: FC = ({ ...props }) => {
         </label>
       </div>
       <Rating rating={form.rating} onChange={(rating) => dispatch({ type: 'setRating', payload: rating })} />
-      <button type='submit'>Отправить</button>
+      <Button type='submit'>Отправить</Button>
     </form>
   );
 };

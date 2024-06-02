@@ -1,5 +1,8 @@
 import { FC } from 'react';
 
+import { ThemeProvider } from '@providers/ThemeProvider';
+import { UserProvider } from '@providers/UserProvider';
+
 import { Layout } from '@components/Layout';
 import { Restaurants } from '@components/Restaurants';
 
@@ -12,8 +15,12 @@ export const App: FC = () => {
   }
 
   return (
-    <Layout>
-      <Restaurants restaurants={restaurants} />
-    </Layout>
+    <ThemeProvider>
+      <UserProvider>
+        <Layout>
+          <Restaurants restaurants={restaurants} />
+        </Layout>
+      </UserProvider>
+    </ThemeProvider>
   );
 };

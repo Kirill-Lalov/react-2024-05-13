@@ -19,6 +19,7 @@ export const Layout: FC<LayoutProps> = ({ children, ...props }) => {
         {children}
       </main>
       <Footer />
+      <div id='modal' style={{ zIndex: 2 }} />
     </div>
   );
 };
