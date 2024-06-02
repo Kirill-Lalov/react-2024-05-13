@@ -14,7 +14,7 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    indent: ['error', 2],
+    indent: ['error', 2, { 'SwitchCase': 1 }],
     quotes: ['error', 'single'],
     semi: 'error',
     'comma-dangle': ['error', {

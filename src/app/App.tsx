@@ -2,6 +2,8 @@ import { FC } from 'react';
 
 import { Layout } from '@components/Layout';
 import { Restaurants } from '@components/Restaurants';
+
+import './style.css';
 import { restaurants } from '../../materials/mock';
 
 export const App: FC = () => {
