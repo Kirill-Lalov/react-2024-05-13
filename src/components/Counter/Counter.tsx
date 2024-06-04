@@ -1,5 +1,9 @@
 import { FC } from 'react';
 
+import { Button } from '@components/Button';
+
+import { useUser } from '@hooks/useUser';
+
 export type CounterProps = {
   count: number;
   min: number;
@@ -9,11 +13,13 @@ export type CounterProps = {
 };
 
 export const Counter: FC<CounterProps> = ({ count, min, max, increment, decrement, ...props }) => {
+  const { user: { isLogin } } = useUser();
+
   return (
     <div {...props}>
-      <button disabled={count <= min} onClick={decrement}>-</button>
+      {isLogin && <Button disabled={count <= min} onClick={decrement}>-</Button>}
       {count}
-      <button disabled={count >= max} onClick={increment}>+</button>
+      {isLogin && <Button disabled={count >= max} onClick={increment}>+</Button>}
     </div>
   );
 };

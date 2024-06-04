@@ -1,7 +1,9 @@
 import { FC } from 'react';
 
 import { Counter } from '@components/Counter';
+
 import { useCount } from '@hooks/useCount';
+
 import { DishType } from './types/Dish';
 
 export type DishProps = {
