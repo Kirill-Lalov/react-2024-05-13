@@ -1,1 +1,1 @@
-export { UserPanel, type UserPanelProps } from './UserPanel';
+export { UserPanel } from './UserPanel';
