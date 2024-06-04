@@ -1,35 +1,22 @@
 import { FC, useState } from 'react';
 
+import { useAppSelector } from '@redux/store';
+
 import { Tabs, EntryType } from '@components/Tabs';
-import { Restaurant, RestaurantType } from '@components/Restaurant';
+import { Restaurant } from '@components/Restaurant';
 
-export type RestaurantsProps = {
-  restaurants: RestaurantType[];
-};
+export const Restaurants: FC = (props) => {
+  const { entities: restaurants, ids: restaurantIds } = useAppSelector(store => store.restaurants);
+  const [selectedRestaurantId, setSelectedRestaurantId] = useState(restaurantIds[0]);
 
-export const Restaurants: FC<RestaurantsProps> = ({ restaurants, ...props }) => {
-  const [selectedRestaurantIndex, setSelectedRestaurantIndex] = useState(0);
-
-  const entries: EntryType<number>[] = restaurants.map((restaurant, index) => (
-    { label: restaurant.name, value: index })
+  const entries: EntryType<string>[] = Object.values(restaurants).map(restaurant => (
+    { label: restaurant.name, value: restaurant.id })
   );
 
   return (
     <div {...props}>
-      <Tabs entries={entries} onChange={setSelectedRestaurantIndex} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
+      <Tabs entries={entries} onChange={setSelectedRestaurantId} />
+      <Restaurant restaurantId={selectedRestaurantId} />
     </div>
   );
 };

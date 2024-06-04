@@ -1,19 +1,19 @@
 import { FC } from 'react';
 
-import { Review, ReviewType } from '@components/Review';
+import { Review } from '@components/Review';
 
 export type ReviewsProps = {
-  reviews: ReviewType[];
+  reviewIds: string[];
 };
 
-export const Reviews: FC<ReviewsProps> = ({ reviews, ...props }) => {
+export const Reviews: FC<ReviewsProps> = ({ reviewIds, ...props }) => {
   return (
     <div {...props}>
       <h3>Отзывы</h3>
       <ul>
-        {reviews.map(review => (
+        {reviewIds.map(reviewId => (
           <li>
-            <Review review={review} />
+            <Review reviewId={reviewId} />
           </li>
         ))}
       </ul>

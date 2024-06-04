@@ -1,0 +1,90 @@
+.root {
+  padding: var(--spacings-xs) var(--spacings-m);
+
+  border: none;
+  box-sizing: border-box;
+
+  cursor: pointer;
+  user-select: none;
+
+  transition: color var(--transitions-slow),
+    background-color var(--transitions-slow),
+    border-color var(--transitions-slow);
+
+  border-radius: var(--border-radius-m);
+
+  font-size: var(--typography-body-one-font-size);
+  line-height: var(--typography-body-one-line-height);
+  font-weight: var(--font-weight-semi-bold);
+
+  &:disabled {
+    transition: none;
+    cursor: not-allowed;
+
+    color: var(--fg-normal-disabled);
+    background-color: var(--bg-highlight-disabled);
+    border-color: transparent;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0px 0px 0px 2px var(--bg-normal),
+                0px 0px 0px 4px var(--border-focus);
+  }
+
+  &.loading {
+    color: transparent;
+  }
+
+  & .spinner {
+    color: var(--fg-normal-disabled);
+  }
+}
+
+.contained {
+  color: var(--fg-on-strong);
+  background-color: var(--bg-accent-strong);
+
+  &:hover:enabled {
+    color: var(--fg-on-strong-hovered);
+    background-color: var(--bg-accent-strong-hovered);
+  }
+
+  &:active:enabled {
+    color: var(--fg-on-strong-pressed);
+    background-color: var(--bg-accent-strong-pressed);
+  }
+}
+
+.outlined {
+  color: var(--fg-normal);
+  background-color: var(--bg-normal);
+  border: var(--border-width-s) solid var(--border-normal);
+
+  &:hover:enabled {
+    color: var(--fg-normal-hovered);
+    background-color: var(--bg-normal-hovered);
+    border-color: var(--border-normal-hovered);
+  }
+
+  &:active:enabled {
+    color: var(--fg-normal-pressed);
+    background-color: var(--bg-normal-pressed);
+    border-color: var(--border-normal-pressed);
+  }
+}
+
+.text {
+  color: var(--fg-accent);
+  background-color: transparent;
+
+  &:hover:enabled {
+    color: var(--fg-accent-hovered);
+    background-color: var(--bg-accent-hovered);
+  }
+
+  &:active:enabled {
+    color: var(--fg-accent-pressed);
+    background-color: var(--bg-accent-pressed);
+  }
+}

@@ -1,20 +1,21 @@
 import { FC } from 'react';
 
+import { useAppSelector } from '@redux/store';
+
 import { Counter } from '@components/Counter';
 
 import { useCount } from '@hooks/useCount';
 
-import { DishType } from './types/Dish';
-
 export type DishProps = {
-  dish: DishType;
+  dishId: string;
 };
 
 const INITIAL_VALUE = 0;
 const MIN = 0;
 const MAX = 5;
 
-export const Dish: FC<DishProps> = ({ dish, ...props }) => {
+export const Dish: FC<DishProps> = ({ dishId, ...props }) => {
+  const dish = useAppSelector(store => store.dishes.entities[dishId]);
   const { count, increment, decrement } = useCount({ initialValue: INITIAL_VALUE, min: MIN, max: MAX });
 
   return (

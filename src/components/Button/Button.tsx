@@ -1,20 +1,25 @@
 import { forwardRef, ButtonHTMLAttributes } from 'react';
+import classNames from 'classnames';
 
-import { useTheme } from '@hooks/useTheme';
+import styles from './Button.module.css';
 
-export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: 'contained' | 'outlined' | 'text';
+};
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-  const { theme } = useTheme();
-
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
+  variant = 'contained',
+  className,
+  children,
+  ...props
+}, ref) => {
   return (
     <button
-      style={{
-        color: `${theme === 'dark' ? '#fff' : '#000'}`,
-        backgroundColor: `${theme === 'dark' ? '#000' : '#fff'}`,
-      }}
+      className={classNames(styles.root, styles[variant], className)}
       ref={ref}
       {...props}
-    />
+    >
+      {children}
+    </button>
   );
 });

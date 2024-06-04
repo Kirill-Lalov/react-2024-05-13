@@ -1,11 +1,13 @@
 import { FC } from 'react';
 
-import { ReviewType } from './types/Review';
+import { useAppSelector } from '@redux/store';
 
 export type ReviewProps = {
-  review: ReviewType;
+  reviewId: string;
 };
 
-export const Review: FC<ReviewProps> = ({ review, ...props }) => {
+export const Review: FC<ReviewProps> = ({ reviewId, ...props }) => {
+  const review = useAppSelector(store => store.reviews.entities[reviewId]);
+
   return <span {...props}>{review.text}</span>;
 };

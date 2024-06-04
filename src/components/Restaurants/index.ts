@@ -1,1 +1,1 @@
-export { Restaurants, type RestaurantsProps } from './Restaurants';
+export { Restaurants } from './Restaurants';
