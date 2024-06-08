@@ -1,22 +1,15 @@
 import { FC, useState } from 'react';
 
-import { useAppSelector } from '@redux/store';
-
-import { Tabs, EntryType } from '@components/Tabs';
 import { Restaurant } from '@components/Restaurant';
+import { RestaurantTabs } from '@components/RestaurantTabs';
 
 export const Restaurants: FC = (props) => {
-  const { entities: restaurants, ids: restaurantIds } = useAppSelector(store => store.restaurants);
-  const [selectedRestaurantId, setSelectedRestaurantId] = useState(restaurantIds[0]);
-
-  const entries: EntryType<string>[] = Object.values(restaurants).map(restaurant => (
-    { label: restaurant.name, value: restaurant.id })
-  );
+  const [selectedRestaurantId, setSelectedRestaurantId] = useState<string>();
 
   return (
     <div {...props}>
-      <Tabs entries={entries} onChange={setSelectedRestaurantId} />
-      <Restaurant restaurantId={selectedRestaurantId} />
+      <RestaurantTabs selectedRestaurantId={selectedRestaurantId} onClick={setSelectedRestaurantId} />
+      {selectedRestaurantId !== undefined && <Restaurant restaurantId={selectedRestaurantId} />}
     </div>
   );
 };
