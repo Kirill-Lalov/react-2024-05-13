@@ -1,12 +1,23 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
+
+import { useAppDispatch, useAppSelector } from '@redux/store';
+import { getDishesByRestaurantId } from '@redux/entities/dishes/thunks/getDishesByRestaurantId';
+import { selectRestaurantMenuIds } from '@redux/entities/restaurants/selectors';
 
 import { Dish } from '@components/Dish';
 
 export type MenuProps = {
-  menuIds: string[];
+  restaurantId: string;
 };
 
-export const Menu: FC<MenuProps> = ({ menuIds, ...props }) => {
+export const Menu: FC<MenuProps> = ({ restaurantId, ...props }) => {
+  const menuIds = useAppSelector((store) => selectRestaurantMenuIds(store, restaurantId));
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getDishesByRestaurantId(restaurantId));
+  }, [dispatch, restaurantId]);
+
   return (
     <div {...props}>
       <h3>Меню</h3>
