@@ -1,21 +1,24 @@
-import { combineSlices, configureStore } from '@reduxjs/toolkit';
-import { useSelector } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { DishesSlice } from './entities/dishes';
-import { RestaurantsSlice } from './entities/restaurants';
-import { ReviewsSlice } from './entities/reviews';
-import { UsersSlice } from './entities/users';
+import { StoreSchema } from './types';
+import { reviewsReducer } from './entities/reviews/reviews';
+import { usersReducer } from './entities/users/users';
+import { restaurantsReducer } from './entities/restaurants/restaurants';
+import { dishesReducer } from './entities/dishes/dishes';
 
-export const store = configureStore({
-  reducer: combineSlices(
-    DishesSlice,
-    RestaurantsSlice,
-    ReviewsSlice,
-    UsersSlice
-  ),
+export const store = configureStore<StoreSchema>({
+  reducer: {
+    restaurants: restaurantsReducer,
+    users: usersReducer,
+    reviews: reviewsReducer,
+    dishes: dishesReducer,
+  },
+  middleware: (defaultMiddleware) => defaultMiddleware(),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export const useAppSelector = useSelector.withTypes<RootState>();
+export const useAppDispatch = useDispatch.withTypes<AppDispatch>();

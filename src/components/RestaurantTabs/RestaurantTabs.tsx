@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { useAppSelector } from '@redux/store';
+import { selectRestaurantIds } from '@redux/entities/restaurants/selectors';
 
 import { RestaurantTab } from '@components/RestaurantTab';
 
@@ -11,7 +12,11 @@ export type RestaurantsTabsProps = {
 };
 
 export const RestaurantTabs: FC<RestaurantsTabsProps> = ({ selectedRestaurantId, onClick }) => {
-  const restaurantsIds = useAppSelector(store => store.restaurants.ids);
+  const restaurantsIds = useAppSelector(selectRestaurantIds);
+
+  if (!restaurantsIds) {
+    return null;
+  }
 
   return (
     <div>

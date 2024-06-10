@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { useAppSelector } from '@redux/store';
+import { selectDishById } from '@redux/entities/dishes/selectors';
 
 import { Counter } from '@components/Counter';
 
@@ -15,8 +16,12 @@ const MIN = 0;
 const MAX = 5;
 
 export const Dish: FC<DishProps> = ({ dishId, ...props }) => {
-  const dish = useAppSelector(store => store.dishes.entities[dishId]);
+  const dish = useAppSelector((store) => selectDishById(store, dishId));
   const { count, increment, decrement } = useCount({ initialValue: INITIAL_VALUE, min: MIN, max: MAX });
+
+  if (!dish) {
+    return null;
+  }
 
   return (
     <div {...props}>

@@ -1,26 +1,22 @@
-import { FC } from 'react';
-import { Provider } from 'react-redux';
-
-import { store } from '@redux/store';
-
-import { ThemeProvider } from '@providers/ThemeProvider';
-import { UserProvider } from '@providers/UserProvider';
+import { FC, useEffect } from 'react';
 
 import { Layout } from '@components/Layout';
 import { Restaurants } from '@components/Restaurants';
 
 import './style.css';
+import { getRestaurants } from '@redux/entities/restaurants/thunks/getRestaurants';
+import { useAppDispatch } from '@redux/store';
 
 export const App: FC = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getRestaurants());
+  }, [dispatch]);
+
   return (
-    <Provider store={store}>
-      <ThemeProvider>
-        <UserProvider>
-          <Layout>
-            <Restaurants />
-          </Layout>
-        </UserProvider>
-      </ThemeProvider>
-    </Provider>
+    <Layout>
+      <Restaurants />
+    </Layout>
   );
 };
