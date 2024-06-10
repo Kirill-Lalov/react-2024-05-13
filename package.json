@@ -8,11 +8,15 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --max-warnings 0",
-    "lint:fix": "eslint . --ext ts,tsx --fix"
+    "lint:fix": "eslint . --ext ts,tsx --fix",
+    "start-server": "node ./materials/simple_api/server.js"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.5",
+    "classnames": "^2.5.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-redux": "^9.1.2"
   },
   "devDependencies": {
     "@types/node": "^20.12.12",

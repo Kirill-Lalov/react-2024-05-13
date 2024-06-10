@@ -1,0 +1,17 @@
+.root {
+  display: flex;
+  flex-direction: column;
+
+  height: 100dvh;
+  max-height: 100dvh;
+}
+
+.main {
+  flex-grow: 1;
+
+  padding: var(--spacings-s) var(--spacings-l);
+
+  background-color: var(--bg-normal);
+
+  overflow: auto;
+}

@@ -1,35 +1,15 @@
 import { FC, useState } from 'react';
 
-import { Tabs, EntryType } from '@components/Tabs';
-import { Restaurant, RestaurantType } from '@components/Restaurant';
+import { Restaurant } from '@components/Restaurant';
+import { RestaurantTabs } from '@components/RestaurantTabs';
 
-export type RestaurantsProps = {
-  restaurants: RestaurantType[];
-};
-
-export const Restaurants: FC<RestaurantsProps> = ({ restaurants, ...props }) => {
-  const [selectedRestaurantIndex, setSelectedRestaurantIndex] = useState(0);
-
-  const entries: EntryType<number>[] = restaurants.map((restaurant, index) => (
-    { label: restaurant.name, value: index })
-  );
+export const Restaurants: FC = (props) => {
+  const [selectedRestaurantId, setSelectedRestaurantId] = useState<string>();
 
   return (
     <div {...props}>
-      <Tabs entries={entries} onChange={setSelectedRestaurantIndex} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
-      <Restaurant restaurant={restaurants[selectedRestaurantIndex]} />
+      <RestaurantTabs selectedRestaurantId={selectedRestaurantId} onClick={setSelectedRestaurantId} />
+      {selectedRestaurantId !== undefined && <Restaurant restaurantId={selectedRestaurantId} />}
     </div>
   );
 };

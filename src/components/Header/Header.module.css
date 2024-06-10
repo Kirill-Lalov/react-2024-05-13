@@ -1,0 +1,16 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: var(--spacings-s) var(--spacings-l);
+
+  color: var(--fg-on-strong);
+  background-color: var(--bg-strong);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacings-s);
+}

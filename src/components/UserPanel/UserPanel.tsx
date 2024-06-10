@@ -21,10 +21,10 @@ export const UserPanel: FC = (props) => {
       {user.isLogin ? (
         <div>
           <h4>{user.username}</h4>
-          <Button onClick={logout}>Выйти</Button>
+          <Button variant='outlined' onClick={logout}>Выйти</Button>
         </div>
       ) : (
-        <Button onClick={handleOpenLoginModal}>Войти</Button>
+        <Button variant='outlined' onClick={handleOpenLoginModal}>Войти</Button>
       )}
 
       {isLoginModalOpen && <LoginModal onClose={handleCloseLoginModal} />}

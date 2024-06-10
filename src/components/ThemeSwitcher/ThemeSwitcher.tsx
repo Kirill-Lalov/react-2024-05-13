@@ -7,5 +7,5 @@ import { useTheme } from '@hooks/useTheme';
 export const ThemeSwitcher: FC = () => {
   const { theme, toggleTheme } = useTheme();
 
-  return <Button onClick={toggleTheme}>{theme}</Button>;
+  return <Button variant='outlined' onClick={toggleTheme}>{theme}</Button>;
 };

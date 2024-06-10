@@ -10,6 +10,7 @@ export default defineConfig({
       '@components': resolve(__dirname, 'src', 'components'),
       '@hooks': resolve(__dirname, 'src', 'hooks'),
       '@providers': resolve(__dirname, 'src', 'providers'),
+      '@redux': resolve(__dirname, 'src', 'redux'),
     },
   },
 });

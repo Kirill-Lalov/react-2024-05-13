@@ -1,4 +1,4 @@
-import { FC, ReactNode, useReducer } from 'react';
+import { FC, ReactNode, useMemo, useReducer } from 'react';
 
 import { UserContext } from './UserContext';
 import { UserType, ActionType } from './types';
@@ -30,15 +30,17 @@ const INITIAL_STATE: UserType = {
 export const UserProvider: FC<UserProviderProps> = ({ children, ...props }) => {
   const [user, dispatch] = useReducer(reducer, INITIAL_STATE);
 
+  const userContextValue = useMemo(() => ({
+    user,
+    login: () => dispatch({ type: 'login' }),
+    logout: () => dispatch({ type: 'logout' }),
+    resetUsername: () => dispatch({ type: 'resetUsername' }),
+    onChangeUsername: (value: string) => dispatch({ type: 'setUsername', payload: value }),
+  }), [user]);
+
   return (
     <UserContext.Provider
-      value={{
-        user,
-        login: () => dispatch({ type: 'login' }),
-        logout: () => dispatch({ type: 'logout' }),
-        resetUsername: () => dispatch({ type: 'resetUsername' }),
-        onChangeUsername: (value: string) => dispatch({ type: 'setUsername', payload: value }),
-      }}
+      value={userContextValue}
       {...props}
     >
       {children}

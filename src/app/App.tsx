@@ -1,26 +1,22 @@
-import { FC } from 'react';
-
-import { ThemeProvider } from '@providers/ThemeProvider';
-import { UserProvider } from '@providers/UserProvider';
+import { FC, useEffect } from 'react';
 
 import { Layout } from '@components/Layout';
 import { Restaurants } from '@components/Restaurants';
 
 import './style.css';
-import { restaurants } from '../../materials/mock';
+import { getRestaurants } from '@redux/entities/restaurants/thunks/getRestaurants';
+import { useAppDispatch } from '@redux/store';
 
 export const App: FC = () => {
-  if (restaurants.length === 0) {
-    return <h1>Ресторанов пока нет!</h1>;
-  }
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getRestaurants());
+  }, [dispatch]);
 
   return (
-    <ThemeProvider>
-      <UserProvider>
-        <Layout>
-          <Restaurants restaurants={restaurants} />
-        </Layout>
-      </UserProvider>
-    </ThemeProvider>
+    <Layout>
+      <Restaurants />
+    </Layout>
   );
 };

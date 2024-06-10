@@ -1,21 +1,27 @@
 import { FC, ReactNode, useRef } from 'react';
+import classNames from 'classnames';
 
 import { Header } from '@components/Header';
 import { Footer } from '@components/Footer';
 import { ScrollProgress } from '@components/ScrollProgress';
+import { useTheme } from '@hooks/useTheme';
+
+import styles from './Layout.module.css';
 
 export type LayoutProps = {
+  className?: string;
   children: ReactNode;
 };
 
-export const Layout: FC<LayoutProps> = ({ children, ...props }) => {
+export const Layout: FC<LayoutProps> = ({ className, children, ...props }) => {
   const parentRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
 
   return (
-    <div style={{ maxHeight: '100dvh', overflow: 'auto' }} ref={parentRef} {...props}>
-      <ScrollProgress parentRef={parentRef} />
+    <div className={classNames(styles.root, theme, className)} {...props}>
       <Header />
-      <main>
+      <ScrollProgress parentRef={parentRef} />
+      <main className={styles.main} ref={parentRef}>
         {children}
       </main>
       <Footer />
