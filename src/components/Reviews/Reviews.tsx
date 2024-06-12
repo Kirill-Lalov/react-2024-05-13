@@ -1,34 +1,27 @@
-import { FC, useEffect } from 'react';
-
-import { useAppDispatch, useAppSelector } from '@redux/store';
-import { getReviewsByRestaurantId } from '@redux/entities/reviews/thunks/getReviewsByRestaurantId';
+import { FC } from 'react';
 
 import { Review } from '@components/Review';
-import { selectRestaurantReviewIds } from '@redux/entities/restaurants/selectors';
+import { useGetReviewsByRestaurantIdQuery } from '@redux/service/api/api';
+import { Preloader } from '@components/Preloader';
 
 export type ReviewsProps = {
   restaurantId: string;
 };
 
 export const Reviews: FC<ReviewsProps> = ({ restaurantId, ...props }) => {
-  const reviewIds = useAppSelector((store) => selectRestaurantReviewIds(store, restaurantId));
-  const dispatch = useAppDispatch();
+  const { data: reviews, isLoading } = useGetReviewsByRestaurantIdQuery(restaurantId);
 
-  useEffect(() => {
-    dispatch(getReviewsByRestaurantId(restaurantId));
-  }, [dispatch, restaurantId]);
-
-  if (!reviewIds) {
-    return null;
+  if (isLoading) {
+    return <Preloader />;
   }
 
   return (
     <div {...props}>
       <h3>Отзывы</h3>
       <ul>
-        {reviewIds?.map(reviewId => (
+        {reviews?.map(review => (
           <li>
-            <Review reviewId={reviewId} />
+            <Review review={review} />
           </li>
         ))}
       </ul>

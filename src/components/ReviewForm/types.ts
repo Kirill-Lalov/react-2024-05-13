@@ -1,12 +1,6 @@
 export type FormType = {
-  name: string;
   text: string;
   rating: number;
-};
-
-type SetNameActionType = {
-  type: 'setName';
-  payload: string;
 };
 
 type SetTextActionType = {
@@ -23,4 +17,4 @@ type SubmitActionType = {
   type: 'submit';
 };
 
-export type ActionType = SetNameActionType | SetTextActionType | SetRatingActionType | SubmitActionType;
+export type ActionType = SetTextActionType | SetRatingActionType | SubmitActionType;

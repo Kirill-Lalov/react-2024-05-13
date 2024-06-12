@@ -6,6 +6,8 @@ import { reviewsReducer } from './entities/reviews/reviews';
 import { usersReducer } from './entities/users/users';
 import { restaurantsReducer } from './entities/restaurants/restaurants';
 import { dishesReducer } from './entities/dishes/dishes';
+import { apiService } from './service/api/api';
+import { setupListeners } from '@reduxjs/toolkit/query';
 
 export const store = configureStore<StoreSchema>({
   reducer: {
@@ -13,9 +15,14 @@ export const store = configureStore<StoreSchema>({
     users: usersReducer,
     reviews: reviewsReducer,
     dishes: dishesReducer,
+    [apiService.reducerPath]: apiService.reducer,
   },
-  middleware: (defaultMiddleware) => defaultMiddleware(),
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiService.middleware),
 });
+
+setupListeners(store.dispatch);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

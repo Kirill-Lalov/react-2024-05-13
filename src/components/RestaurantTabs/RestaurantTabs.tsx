@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
-import { useAppSelector } from '@redux/store';
-import { selectRestaurantIds } from '@redux/entities/restaurants/selectors';
+import { useGetRestaurantsQuery } from '@redux/service/api/api';
 
-import { RestaurantTab } from '@components/RestaurantTab';
+import { Preloader } from '@components/Preloader';
+import { Tab } from '@components/Tab';
 
 export type RestaurantsTabsProps = {
   className?: string;
@@ -11,20 +11,20 @@ export type RestaurantsTabsProps = {
   onClick: (value: string | undefined) => void;
 };
 
-export const RestaurantTabs: FC<RestaurantsTabsProps> = ({ selectedRestaurantId, onClick }) => {
-  const restaurantsIds = useAppSelector(selectRestaurantIds);
+export const RestaurantTabs: FC<RestaurantsTabsProps> = ({ selectedRestaurantId, onClick, ...props }) => {
+  const { data: restaurants, isSuccess, isLoading } = useGetRestaurantsQuery();
 
-  if (!restaurantsIds) {
-    return null;
+  if (isLoading) {
+    return <Preloader />;
   }
 
   return (
-    <div>
-      {restaurantsIds.map(restaurantId => (
-        <RestaurantTab
-          restaurantId={restaurantId}
-          isActive={selectedRestaurantId === restaurantId}
-          onClick={onClick}
+    <div {...props}>
+      {isSuccess && restaurants.map(restaurant => (
+        <Tab
+          label={restaurant.name}
+          isActive={restaurant.id === selectedRestaurantId}
+          onClick={() => onClick(restaurant.id)}
         />
       ))}
     </div>

@@ -1,22 +1,18 @@
 import { FC } from 'react';
 
-import { useAppSelector } from '@redux/store';
-import { selectReviewById } from '@redux/entities/reviews/selectors';
+import { ReviewType } from '@redux/entities/reviews/types';
+
+import { Button } from '@components/Button';
 
 export type ReviewProps = {
-  reviewId: string;
+  review: ReviewType;
 };
 
-export const Review: FC<ReviewProps> = ({ reviewId, ...props }) => {
-  const review = useAppSelector(store => selectReviewById(store, reviewId));
-
-  if (!review) {
-    return null;
-  }
-
+export const Review: FC<ReviewProps> = ({ review, ...props }) => {
   return (
     <div {...props}>
       <span>{review.text}</span>
+      <Button>Изменить</Button>
       <hr />
     </div>
   );
