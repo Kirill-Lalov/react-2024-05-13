@@ -1,19 +1,18 @@
-import { FC, ReactNode, useRef } from 'react';
-import classNames from 'classnames';
+import { FC, useRef } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import { Header } from '@components/Header';
 import { Footer } from '@components/Footer';
 import { ScrollProgress } from '@components/ScrollProgress';
 import { useTheme } from '@hooks/useTheme';
-
+import classNames from 'classnames';
 import styles from './Layout.module.css';
 
 export type LayoutProps = {
   className?: string;
-  children: ReactNode;
 };
 
-export const Layout: FC<LayoutProps> = ({ className, children, ...props }) => {
+export const Layout: FC<LayoutProps> = ({ className, ...props }) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
 
@@ -22,7 +21,7 @@ export const Layout: FC<LayoutProps> = ({ className, children, ...props }) => {
       <Header />
       <ScrollProgress parentRef={parentRef} />
       <main className={styles.main} ref={parentRef}>
-        {children}
+        <Outlet />
       </main>
       <Footer />
       <div id='modal' style={{ zIndex: 2 }} />

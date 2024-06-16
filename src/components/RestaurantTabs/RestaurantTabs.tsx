@@ -3,15 +3,13 @@ import { FC } from 'react';
 import { useGetRestaurantsQuery } from '@redux/service/api/api';
 
 import { Preloader } from '@components/Preloader';
-import { Tab } from '@components/Tab';
+import { RestaurantTab } from '@components/RestaurantTab/RestaurantTab';
 
 export type RestaurantsTabsProps = {
   className?: string;
-  selectedRestaurantId?: string;
-  onClick: (value: string | undefined) => void;
 };
 
-export const RestaurantTabs: FC<RestaurantsTabsProps> = ({ selectedRestaurantId, onClick, ...props }) => {
+export const RestaurantTabs: FC<RestaurantsTabsProps> = ({ ...props }) => {
   const { data: restaurants, isSuccess, isLoading } = useGetRestaurantsQuery();
 
   if (isLoading) {
@@ -21,11 +19,7 @@ export const RestaurantTabs: FC<RestaurantsTabsProps> = ({ selectedRestaurantId,
   return (
     <div {...props}>
       {isSuccess && restaurants.map(restaurant => (
-        <Tab
-          label={restaurant.name}
-          isActive={restaurant.id === selectedRestaurantId}
-          onClick={() => onClick(restaurant.id)}
-        />
+        <RestaurantTab restaurantId={restaurant.id} />
       ))}
     </div>
   );

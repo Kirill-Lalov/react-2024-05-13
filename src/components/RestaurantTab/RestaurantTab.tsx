@@ -1,20 +1,31 @@
 import { FC } from 'react';
+import classNames from 'classnames';
+import { NavLink } from 'react-router-dom';
 
-import { useAppSelector } from '@redux/store';
-import { selectRestaurantById } from '@redux/entities/restaurants/selectors';
+import { useGetRestaurantsQuery } from '@redux/service/api/api';
 
-import { Tab, TabProps } from '@components/Tab';
+import { paths } from '@router/paths';
 
-export type RestaurantTabProps = Pick<TabProps, 'isActive'> & {
-  className?: string;
+import styles from './RestaurantTab.module.css';
+
+export type RestaurantTabProps = {
   restaurantId: string;
-  onClick: (value: string | undefined) => void;
+  className?: string;
 };
 
-export const RestaurantTab: FC<RestaurantTabProps> = ({ restaurantId, onClick, ...props }) => {
-  const restaurant = useAppSelector(store => selectRestaurantById(store, restaurantId));
+export const RestaurantTab: FC<RestaurantTabProps> = ({ restaurantId, ...props }) => {
+  const { data: restaurant } = useGetRestaurantsQuery(undefined, {
+    skip: !restaurantId,
+    selectFromResult: (store) => ({ ...store, data: store.data?.find(({ id }) => id === restaurantId) }),
+  });
 
   return (
-    <Tab label={restaurant.name} onClick={() => onClick(restaurant.id)} {...props} />
+    <NavLink
+      className={({ isActive }) => classNames(isActive && styles.isActive, classNames)}
+      to={`${paths.restaurants}/${restaurant?.id}`}
+      {...props}
+    >
+      {restaurant?.name}
+    </NavLink>
   );
 };

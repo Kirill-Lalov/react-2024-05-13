@@ -11,6 +11,8 @@ export default defineConfig({
       '@hooks': resolve(__dirname, 'src', 'hooks'),
       '@providers': resolve(__dirname, 'src', 'providers'),
       '@redux': resolve(__dirname, 'src', 'redux'),
+      '@router': resolve(__dirname, 'src', 'router'),
+      '@pages': resolve(__dirname, 'src', 'pages'),
     },
   },
 });

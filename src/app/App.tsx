@@ -1,14 +1,12 @@
 import { FC } from 'react';
+import { RouterProvider } from 'react-router-dom';
 
-import { Layout } from '@components/Layout';
-import { Restaurants } from '@components/Restaurants';
+import { router } from '@router/router';
 
 import './style.css';
 
 export const App: FC = () => {
   return (
-    <Layout>
-      <Restaurants />
-    </Layout>
+    <RouterProvider router={router} />
   );
 };
